@@ -1,44 +1,46 @@
 # Google AppScripts Invoice Processor
 
-Automate your invoice email address pull invoices from an email address and save them to a Google Drive folder.
+Streamline your invoicing process with our Google AppScripts Invoice Processor. This tool automatically retrieves invoices from a specified email address and stores them in a designated Google Drive folder.
 
-## Getting Started
+## Quick Start
 
-It's super easy! Copy the [script](https://github.com/velddev/google-appscripts-invoice-processor/blob/main/index.gs) in your new appscripts project and get to configuring! 
+Get started in no time! Simply clone the [script](https://github.com/velddev/google-appscripts-invoice-processor/blob/main/index.gs) into your Google AppScripts project and proceed to setup.
 
-### Configuration Properties
+### Setup Instructions
 
-name  | required? | description | remarks
------ | --------- | ----------- | -------
-drive-folder-id | yes |The ID of the Drive folder. You can find the ID in your address bar. For example for 'https://drive.google.com/drive/folders/1RBI0koQItEo8u5wlN5Z-csHZlnjsTrls'; '1RBI0koQItEo8u5wlN5Z-csHZlnjsTrls' is the ID. | Make sure your current user account has access to write to the folder.
-email | yes | Your preferred email address. This email address will be used to pull emails and process the attachments. Make sure this is consistent across your inbox. | 
-file-pattern | no | This is the pattern in which the file will be saved. See [File Pattern Variables](#file-pattern-variables) for all possible variables. |
-folder-pattern | no | This pattern determines what subfolder your file will be saved in. These subfolders will be created beforehand, even if there is no attachment to process. |
+Configure the script using the following properties:
 
-## Patterns
+Property | Required | Description | Additional Info
+--- | --- | --- | ---
+`drive-folder-id` | Yes | The Google Drive folder ID where invoices will be saved. Find this ID in your browser's address bar. | Ensure you have write access to the folder.
+`email` | Yes | The email address to monitor for incoming invoices. | Ensure consistency across your inbox.
+`file-pattern` | No | Defines the naming convention for saved files. Refer to [File Pattern Variables](#file-pattern-variables) for options.
+`folder-pattern` | No | Specifies the subfolder structure within the Drive folder. Subfolders are pre-created as needed.
 
-Patterns are used to customize your setup. They work very similar to string interpolation. Simply encase your variable with '{' and '}' to make it work. an example would be {year}.{fileType} would translate to something like '2024.pdf'.
+## Customization with Patterns
+
+Utilize patterns to tailor file and folder naming. Wrap variables in `{}` to integrate them into your naming scheme. For example, `{year}.{fileType}` could result in `2024.pdf`.
 
 ### Folder Pattern Variables
 
-name  | description
------ | -----------
-month | The current incoming email's month.
-quarter | The quarter in which the incoming email's month is in.
-sender | The full email address of the sender (FROM).
-senderDomain | The pure domain of the sender (FROM). This is to simplify the domain down to the root domain. e.g. 'notify.cloudflare.com' becomes 'cloudflare'.
-uniqueId | A unique UUID, not guaranteed to be unique, but [VERY improbable](https://jhall.io/archive/2021/05/19/what-are-the-odds/).
-year | The current incoming email's year.
+Variable | Description
+--- | ---
+`month` | Month of the received email.
+`quarter` | Quarter of the received email's month.
+`sender` | Sender's full email address.
+`senderDomain` | Root domain of the sender's email address, e.g., 'cloudflare' from 'notify.cloudflare.com'.
+`uniqueId` | A UUID for unique identification (though not [guaranteed to be globally unique](https://jhall.io/archive/2021/05/19/what-are-the-odds/)).
+`year` | Year of the received email.
 
 ### File Pattern Variables
 
-name  | description
------ | -----------
-fileName | The file's current name.
-fileType | The file's extension.
-month | The current incoming email's month.
-quarter | The quarter in which the incoming email's month is in.
-sender | The full email address of the sender (FROM).
-senderDomain | The pure domain of the sender (FROM). This is to simplify the domain down to the root domain. e.g. 'notify.cloudflare.com' becomes 'cloudflare'.
-uniqueId | A unique UUID, not guaranteed to be unique, but [VERY improbable](https://jhall.io/archive/2021/05/19/what-are-the-odds/).
-year | The current incoming email's year.
+Variable | Description
+--- | ---
+`fileName` | Original name of the file.
+`fileType` | File extension.
+`month` | Month of the received email.
+`quarter` | Quarter of the received email's month.
+`sender` | Sender's full email address.
+`senderDomain` | Root domain of the sender's email address.
+`uniqueId` | A UUID for unique identification.
+`year` | Year of the received email.
