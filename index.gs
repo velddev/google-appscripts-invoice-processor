@@ -128,6 +128,16 @@ function getOrCreateFolder(parent, folderName) {
  * @param {string} email
  */
 function getEmailSegments(email) {
+  // If the email is direct without a display name, we do not need to handle the formatting regex and 
+  // we can simply check the email directly.
+  if(!email.includes(">")) {
+    const directMatches = email.match(/(.+)\@(.+\..+)/);
+    return {
+      user: directMatches[1],
+      domain: directMatches[2],
+    }
+  }
+
   const matches = email.match(/.*\<(.+)\@(.+\..+)\>/);
   if(!matches) {
     throw new Error(`Cannot process email address '${email}' as it was not a correct address.`)
