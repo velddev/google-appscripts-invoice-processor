@@ -34,7 +34,7 @@ function processInvoices() {
 
   let userLabel = GmailApp.getUserLabelByName(invoiceProcessedLabal)
   if(!userLabel) {
-    GmailApp.createLabel(invoiceProcessedLabal);
+    userLabel = GmailApp.createLabel(invoiceProcessedLabal);
   }
 
   for (const thread of threads) {
